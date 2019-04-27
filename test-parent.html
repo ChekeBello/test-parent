@@ -1,0 +1,50 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../test-component1/test-component1.html">
+<link rel="import" href="../test-component2/test-component2.html">
+
+
+<dom-module id="test-parent">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <test-component1 id="primero" on-one-of-two-pressed="tellBrother"></test-component1>
+    <test-component2 id="segundo"></test-component2>
+  </template>
+
+  <script>
+    /**
+     * `test-parent`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TestParent extends Polymer.Element {
+      static get is() { return 'test-parent'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'test-parent'
+          }
+        };
+      }
+        tellBrother(e){
+            if(e.detail == "first"){
+                this.$.primero.style.display = "none";
+                this.$.segundo.isList = true;
+            }
+            if(e.detail == "second"){
+                this.$.primero.style.display = "none";
+                this.$.segundo.isTablet = true;
+            }
+        }
+    }
+
+    window.customElements.define(TestParent.is, TestParent);
+  </script>
+</dom-module>
